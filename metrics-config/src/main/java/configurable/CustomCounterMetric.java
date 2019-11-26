@@ -6,23 +6,24 @@ import org.eclipse.microprofile.metrics.Counter;
 import org.eclipse.microprofile.metrics.Metric;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 public class CustomCounterMetric implements Metric, Counter {
 
     @Inject
     @ConfigProperty(name="dummy_increment")
-    int increment;
+    Provider<Long> increment;
 
     private long counter = 0;
 
     @Override
     public void inc() {
-        counter = counter + increment;
+        counter = counter + increment.get();
     }
 
     @Override
     public void inc(long l) {
-        counter = counter + l + increment ;
+        counter = counter + l + increment.get() ;
     }
 
     @Override

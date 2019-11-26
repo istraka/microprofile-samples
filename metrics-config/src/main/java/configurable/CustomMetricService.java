@@ -25,9 +25,8 @@ public class CustomMetricService {
     MetricRegistry metricRegistry;
 
     @Counted
-    public String hello() throws InterruptedException {
+    public String hello() {
         metricRegistry.counter("custom-metric").inc();
-        Thread.sleep(new Random().nextInt(100) + 1);
-        return "Hello! " + increment + " : " +metricRegistry.counter("custom-metric").getCount() + "\n";
+        return "Hello! " + metricRegistry.counter("custom-metric").getCount() + "\n";
     }
 }

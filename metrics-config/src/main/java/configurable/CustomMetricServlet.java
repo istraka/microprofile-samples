@@ -18,12 +18,10 @@ import java.io.IOException;
 @WebServlet("/metric")
 public class CustomMetricServlet extends HttpServlet {
     @Inject
-    private CustomMetricService hello;
-
-    @Inject
     @RegistryType(type = MetricRegistry.Type.APPLICATION)
     MetricRegistry metricRegistry;
-
+    @Inject
+    private CustomMetricService hello;
 
     @Override
     public void init() throws ServletException {
@@ -38,10 +36,6 @@ public class CustomMetricServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        try {
-            resp.getWriter().print(hello.hello());
-        } catch (InterruptedException e) {
-            throw new ServletException(e);
-        }
+        resp.getWriter().print(hello.hello());
     }
 }
